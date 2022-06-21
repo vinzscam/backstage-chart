@@ -17,6 +17,7 @@ metadata:
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
     {{- end }}
 spec:
+  ingressClassName: {{ .Values.ingress.className }}
   rules:
     - host: {{ .Values.ingress.host }}
       http:

@@ -61,6 +61,9 @@ ingress:
   ## @param ingress.enabled Enable the creation of the ingress resource
   enabled: false
 
+  ## @param ingress.className Name of the IngressClass cluster resource which defines which controller will implement the resource (e.g nginx)
+  className: ""
+
   ## @param ingress.annotations Additional annotations for the Ingress resource
   annotations: '{
     "nginx.ingress.kubernetes.io/rewrite-target": "/",
