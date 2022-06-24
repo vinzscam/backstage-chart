@@ -2,6 +2,21 @@ apiVersion: v1
 entries:
   backstage:
   - apiVersion: v2
+    created: "2022-06-24T22:15:30.224693887Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 317be75983fdb0fade4c08e7465ecfdc466a3950eca8aa40148b68d52890aeb2
+    name: backstage
+    type: application
+    urls:
+    - https://github.com/vinzscam/backstage-chart/releases/download/backstage-0.2.0/backstage-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2022-06-10T08:42:09.152643618Z"
     dependencies:
     - name: common
@@ -46,4 +61,4 @@ entries:
     urls:
     - https://github.com/vinzscam/backstage-chart/releases/download/backstage-0.1.0/backstage-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-10T08:42:09.15266812Z"
+generated: "2022-06-24T22:15:30.224715087Z"
