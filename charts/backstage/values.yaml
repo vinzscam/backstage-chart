@@ -206,13 +206,13 @@ postgresql:
     # -- The secret keys Postgres will look for to retrieve the relevant password
     secretKeys:
 
-      # -- The key in which Postgres well look for, for the admin password, in the existing Secret
+      # -- The key in which Postgres will look for, for the admin password, in the existing Secret
       adminPasswordKey: admin-password
 
-      # -- The key in which Postgres well look for, for the user password, in the existing Secret
+      # -- The key in which Postgres will look for, for the user password, in the existing Secret
       userPasswordKey: user-password
 
-      # -- The key in which Postgres well look for, for the replication password, in the existing Secret
+      # -- The key in which Postgres will look for, for the replication password, in the existing Secret
       replicationPasswordKey: replication-password
   
   # -- PostgreSQL architecture (`standalone` or `replication`)
