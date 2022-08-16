@@ -109,10 +109,38 @@ backstage:
     backend: 7007
   command: ["node", "packages/backend"]
   args: []
-  extraAppConfig: []
-  extraEnvVars: []
-  extraEnvVarsSecrets:
 
+  # -- AppConfig that you want your Backstage application to use
+  appConfig:
+
+    # -- AppConfig that you want to supply to your backstage application that is stored
+    # inside of a ConfigMap
+    asConfigMap:
+      enabled: false
+
+      # -- The different ConfigMaps to use for your AppConfig
+      # Example:
+      # appConfigAsConfigMap:
+      #   - configMapRef: my-dev-app-config 
+      #     filename: app-config.dev.yaml
+      #   - configMapRef: my-prod-app-config 
+      #     filename: app-config.prod.yaml
+      appConfigAsConfigMap:
+        - configMapRef: app-config-production
+          filename: app-config.production.yaml
+    
+    # -- AppConfig that you already have inside of the Backstage Image
+    # Example:
+    # appConfigFile:
+    # - filename: app-config.yaml
+    # - filename: app-config.production.yaml
+    appConfigFile:
+      - filename: app-config.yaml
+      - filename: app-config.production.yaml
+
+  extraEnvVars: []
+
+  extraEnvVarsSecrets: []
 ## @section Traffic Exposure parameters
 
 ## Service parameters

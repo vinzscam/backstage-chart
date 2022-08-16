@@ -23,8 +23,8 @@ spec:
         app.kubernetes.io/component: backstage
     spec:
       volumes:
-        {{- if .Values.backstage.extraAppConfig }}
-        {{- range .Values.backstage.extraAppConfig }}
+        {{- if .Values.backstage.appConfig.asConfigMap.enabled }}
+        {{- range .Values.backstage.appConfig.asConfigMap.appConfigAsConfigMap }}
         - name: {{ .configMapRef }}
           configMap:
             name: {{ .configMapRef }}
@@ -53,8 +53,14 @@ spec:
           {{- range .Values.backstage.args }}
             - {{ . | quote }}
           {{- end }}
-          {{- if .Values.backstage.extraAppConfig }}
-          {{- range .Values.backstage.extraAppConfig }}
+          {{- if .Values.backstage.appConfig.appConfigFile }}
+          {{- range .Values.backstage.appConfig.appConfigFile }}
+            - "--config"
+            - {{ .filename | quote }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.backstage.appConfig.asConfigMap.enabled }}
+          {{- range .Values.backstage.appConfig.asConfigMap.appConfigAsConfigMap }}
             - "--config"
             - {{ .filename | quote }}
           {{- end }}
@@ -68,8 +74,6 @@ spec:
             {{- end }}
           {{- end }}
           env:
-            - name: APP_CONFIG_backend_listen_port
-              value: {{ .Values.backstage.containerPorts.backend | quote }}
             {{- if .Values.postgresql.enabled }}
             - name: POSTGRES_HOST
               value: {{ include "backstage.postgresql.host" . }}
@@ -90,9 +94,9 @@ spec:
             - name: backend
               containerPort: {{ .Values.backstage.containerPorts.backend }}
               protocol: TCP
-          {{- if .Values.backstage.extraAppConfig }}
+          {{- if .Values.backstage.appConfig.asConfigMap.enabled }}
           volumeMounts:
-            {{- range .Values.backstage.extraAppConfig }}
+            {{- range .Values.backstage.appConfig.asConfigMap.appConfigAsConfigMap }}
             - name: {{ .configMapRef }}
               mountPath: "/app/{{ .filename }}"
               subPath: {{ .filename }} 
