@@ -31,7 +31,12 @@ spec:
         - name: {{ .configMapRef }}
           configMap:
             name: {{ .configMapRef }}
-        {{- end }}            
+        {{- end }}
+        {{- end }}
+        {{- if .Values.backstage.extraAppConfigToConfigMap }}
+        - configMap:
+            name: backstage-app-config
+          name: backstage-app-config
         {{- end }}
       {{- if .Values.backstage.image.pullSecrets }}
       imagePullSecrets:
@@ -61,6 +66,10 @@ spec:
             - "--config"
             - {{ .filename | quote }}
           {{- end }}
+          {{- end }}
+          {{- if .Values.backstage.extraAppConfigToConfigMap }}
+            - "--config"
+            - "app-config-from-configmap.yaml"
           {{- end }}
           {{- end }}
           {{- if .Values.backstage.extraEnvVarsSecrets }}
@@ -93,11 +102,16 @@ spec:
             - name: backend
               containerPort: {{ .Values.backstage.containerPorts.backend }}
               protocol: TCP
-          {{- if .Values.backstage.extraAppConfig }}
+          {{- if (or .Values.backstage.extraAppConfig .Values.backstage.extraAppConfigToConfigMap) }}
           volumeMounts:
             {{- range .Values.backstage.extraAppConfig }}
             - name: {{ .configMapRef }}
               mountPath: "/app/{{ .filename }}"
               subPath: {{ .filename }} 
+            {{- end }}
+            {{- if .Values.backstage.extraAppConfigToConfigMap }}
+            - name: backstage-app-config
+              mountPath: /app/app-config-from-configmap.yaml
+              subPath: app-config.yaml
             {{- end }}
           {{- end }}

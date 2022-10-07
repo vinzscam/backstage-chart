@@ -113,6 +113,12 @@ backstage:
   extraEnvVars: []
   extraEnvVarsSecrets:
 
+  # E.g:
+  # extraAppConfigToConfigMap: |
+  #   app:
+  #     baseUrl: https://somedomain.tld
+  extraAppConfigToConfigMap: null
+
 ## @section Traffic Exposure parameters
 
 ## Service parameters
