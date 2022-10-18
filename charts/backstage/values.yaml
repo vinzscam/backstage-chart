@@ -226,7 +226,7 @@ serviceAccount:
 
   # -- Name of the created ServiceAccount
   # If not set and `serviceAccount.create` is true, a name is generated
-  name: backstage-sa
+  name: ""
 
   # -- Additional custom labels to the service ServiceAccount.
   labels: {}
