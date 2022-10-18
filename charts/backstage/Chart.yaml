@@ -27,6 +27,3 @@ dependencies:
     name: postgresql
     repository: https://charts.bitnami.com/bitnami
     version: 11.x.x
-annotations:
-  artifacthub.io/changes: |
-    - "[enhancement]: Adds Backstage ServiceAccount"
