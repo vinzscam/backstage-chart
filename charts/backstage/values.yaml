@@ -108,7 +108,7 @@ backstage:
   containerPorts:
     backend: 7007
   command: ["node", "packages/backend"]
-  args: []
+  args: ["--config", "app-config.yaml", "--config", "app-config.production.yaml"]
   extraAppConfig: []
   extraEnvVars: []
   extraEnvVarsSecrets:
